@@ -1,5 +1,5 @@
 {
- "compilerOptions": {
+  "compilerOptions": {
     "outDir": "./dist/",
     "types": ["node", "jest"],
     "module": "commonjs",
@@ -15,8 +15,7 @@
     "lib": [
       "dom",
       "es6"
-    ],
-    "jsx": "react"
+    ]
   },
   "exclude": [
     "node_modules",
