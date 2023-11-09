@@ -39,8 +39,6 @@ export const cleanFormValues = <D extends Record<string, unknown>>(
   return cleanData;
 };
 
-export const numberValue = (input: '' | number): number => (input === '' ? 0 : input);
-
 type $AnimationName = 'fadeIn' | 'fadeInUp' | 'fadeInDown';
 
 export const animationClass = (name: $AnimationName): string => {

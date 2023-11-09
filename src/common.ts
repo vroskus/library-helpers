@@ -114,3 +114,5 @@ export const getObjectValues: <T extends Record<string, unknown>, K extends keyo
 export const getObjectEntries: <T extends Record<string, unknown>, K extends keyof T>(
   o: T,
 ) => [K, T[K]][] = Object.entries;
+
+export const numberValue = (input: unknown): number => (input === '' ? 0 : Number(input));
