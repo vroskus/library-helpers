@@ -1,5 +1,6 @@
 // Global Types
 import type {
+  Request,
   RequestHandler,
 } from 'express';
 
@@ -24,8 +25,8 @@ export const getValue = <V extends string | null | void>(value: V, defaultValue:
   return output;
 };
 
-export const durationMiddleware: RequestHandler = () => (
-  req,
+export const durationMiddleware = (): RequestHandler => (
+  req: Request & { start: [number, number] },
   res,
   next,
 ) => {
