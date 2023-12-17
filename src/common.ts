@@ -1,12 +1,11 @@
 // Global Types
 import type {
-  NextFunction as $Next,
-  Request as $Request,
-  Response as $Response,
+  RequestHandler,
 } from 'express';
 
 // Helpers
 import _ from 'lodash';
+import moment from 'moment';
 import aigle from 'aigle';
 import sh from 'short-hash';
 
@@ -25,21 +24,17 @@ export const getValue = <V extends string | null | void>(value: V, defaultValue:
   return output;
 };
 
-export const durationMiddleware = <REQ extends ($Request & {
-  start?: [number, number];
-}), RES extends $Response>() => (
-    req: REQ & {
-      start?: [number, number];
-    },
-    res: RES,
-    next: $Next,
-  ) => {
-    const start: [number, number] = process.hrtime();
+export const durationMiddleware: RequestHandler = () => (
+  req,
+  res,
+  next,
+) => {
+  const start: [number, number] = process.hrtime();
 
-    req.start = start;
+  req.start = start;
 
-    next();
-  };
+  next();
+};
 
 export const getDuration = (start: [number, number] | void): number => {
   let timeInMs = 0;
@@ -90,6 +85,14 @@ export const getFileUrl = ({
 }): string => `${cdnUrl}/files/${file}`;
 
 export const makeCode = (input: string): string => sh(input).toUpperCase();
+
+export const makeRollingCode = (value: string, lifetime: number): string => {
+  let time = moment().unix();
+
+  time -= time % lifetime;
+
+  return makeCode(`${value}${time}`);
+};
 
 export const sleep = (milliseconds: number): Promise<void> => new Promise((resolve) => {
   setTimeout(
