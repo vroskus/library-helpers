@@ -7,8 +7,8 @@ import {
   fadeInUp,
 } from 'react-animations';
 import {
-  css,
   StyleSheet,
+  css,
 } from 'aphrodite';
 
 export * from './common';
@@ -39,7 +39,7 @@ export const cleanFormValues = <D extends Record<string, unknown>>(
   return cleanData;
 };
 
-type $AnimationName = 'fadeIn' | 'fadeInUp' | 'fadeInDown';
+type $AnimationName = 'fadeIn' | 'fadeInDown' | 'fadeInUp';
 
 export const animationClass = (name: $AnimationName): string => {
   const animations: Record<$AnimationName, unknown> = {
@@ -66,7 +66,7 @@ export const getUrlGetParams = (input: string): Record<string, string> => {
 
   _.forEach(
     parsedData,
-    (value: string | Array<string>, key: string) => {
+    (value: Array<string> | string, key: string) => {
       if (Array.isArray(value)) {
         output[key] = value.join(';');
       } else {

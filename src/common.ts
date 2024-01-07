@@ -15,7 +15,7 @@ const asyncLodash: _.LoDashStatic = aigle.mixin(
   undefined,
 );
 
-export const getValue = <V extends string | null | void>(value: V, defaultValue: V): V => {
+export const getValue = <V extends null | string | void>(value: V, defaultValue: V): V => {
   let output = defaultValue;
 
   if (value !== null && value !== '') {
@@ -51,7 +51,7 @@ export const getDuration = (start: [number, number] | void): number => {
 
 export const sortData = async <D extends Array<Record<string, unknown>>>(
   data: D,
-  field: string | Array<string>,
+  field: Array<string> | string,
   reverse?: boolean,
 ): Promise<D> => asyncLodash
   .chain(data)
@@ -66,8 +66,8 @@ export const getImageUrl = ({
   undefinedImage,
 }: {
   cdnUrl: string;
-  image?: string | null;
-  size: 'min' | 'mid' | 'max' | 'sqr';
+  image?: null | string;
+  size: 'max' | 'mid' | 'min' | 'sqr';
   undefinedImage?: string;
 }): string => {
   if (image) {
