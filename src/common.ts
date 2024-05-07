@@ -1,6 +1,5 @@
 // Global Types
 import type {
-  Request,
   RequestHandler,
 } from 'express';
 
@@ -26,13 +25,17 @@ export const getValue = <V extends null | string | void>(value: V, defaultValue:
 };
 
 export const durationMiddleware = (): RequestHandler => (
-  req: Request & { start: [number, number] },
+  req,
   res,
   next,
 ) => {
   const start: [number, number] = process.hrtime();
 
-  req.start = start;
+  _.set(
+    req,
+    'start',
+    start,
+  );
 
   next();
 };

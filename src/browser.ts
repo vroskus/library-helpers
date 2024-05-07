@@ -42,7 +42,7 @@ export const cleanFormValues = <D extends Record<string, unknown>>(
 type $AnimationName = 'fadeIn' | 'fadeInDown' | 'fadeInUp';
 
 export const animationClass = (name: $AnimationName): string => {
-  const animations: Record<$AnimationName, unknown> = {
+  const animations = {
     fadeIn,
     fadeInDown,
     fadeInUp,
@@ -58,7 +58,7 @@ export const animationClass = (name: $AnimationName): string => {
   return css(style.animation);
 };
 
-export const getUrlGetParams = (input: string): Record<string, string> => {
+export const getUrlGetParams = (input: string): Record<string, null | string> => {
   const parsedData = qs.parse(input);
 
   const output = {
@@ -66,7 +66,7 @@ export const getUrlGetParams = (input: string): Record<string, string> => {
 
   _.forEach(
     parsedData,
-    (value: Array<string> | string, key: string) => {
+    (value: Array<null | string> | null | string, key: string) => {
       if (Array.isArray(value)) {
         output[key] = value.join(';');
       } else {
