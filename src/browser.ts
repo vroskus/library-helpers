@@ -7,8 +7,8 @@ import {
   fadeInUp,
 } from 'react-animations';
 import {
-  StyleSheet,
   css,
+  StyleSheet,
 } from 'aphrodite';
 
 export * from './common';
@@ -31,12 +31,11 @@ export const cleanFormValues = <D extends Record<string, unknown>>(
       '_',
     ),
   );
-  const cleanData = _.mapValues(
+
+  return _.mapValues(
     withoutHiddenItemsData,
     (value) => (value === '' || isEmptyString(value) ? null : value),
   ) as D;
-
-  return cleanData;
 };
 
 type $AnimationName = 'fadeIn' | 'fadeInDown' | 'fadeInUp';
