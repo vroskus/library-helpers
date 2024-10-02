@@ -21,6 +21,10 @@ const isEmptyString = (value: unknown): boolean => {
   return false;
 };
 
+const isObject = (input: unknown): boolean => input !== null
+  && typeof input === 'object'
+  && input?.constructor === Object;
+
 export const cleanFormValues = <D extends Record<string, unknown>>(
   data: Record<string, unknown>,
 ): D => {
@@ -34,7 +38,19 @@ export const cleanFormValues = <D extends Record<string, unknown>>(
 
   return _.mapValues(
     withoutHiddenItemsData,
-    (value) => (value === '' || isEmptyString(value) ? null : value),
+    (value) => {
+      if (Array.isArray(value) === true) {
+        return value.map((valueValue) => {
+          if (isObject(valueValue) === true) {
+            return cleanFormValues(valueValue);
+          }
+
+          return isEmptyString(valueValue) === true ? null : valueValue;
+        });
+      }
+
+      return isEmptyString(value) === true ? null : value;
+    },
   ) as D;
 };
 
