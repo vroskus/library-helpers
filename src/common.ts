@@ -13,6 +13,9 @@ const asyncLodash: _.LoDashStatic = aigle.mixin(
   _,
   undefined,
 );
+const zeroValue: number = 0;
+const mn1: number = 1000000000;
+const mn2: number = 1000000;
 
 export const getValue = <V extends null | string | void>(value: V, defaultValue: V): V => {
   let output = defaultValue;
@@ -41,12 +44,12 @@ export const durationMiddleware = (): RequestHandler => (
 };
 
 export const getDuration = (start: [number, number] | void): number => {
-  let timeInMs = 0;
+  let timeInMs = zeroValue;
 
   if (start) {
     const end = process.hrtime(start);
 
-    timeInMs = (end[0] * 1000000000 + end[1]) / 1000000;
+    timeInMs = (end[0] * mn1 + end[1]) / mn2;
   }
 
   return timeInMs;
@@ -122,6 +125,6 @@ export const getObjectEntries: <T extends Record<string, unknown>, K extends key
   o: T,
 ) => [K, T[K]][] = Object.entries;
 
-export const numberValue = (input: unknown): number => (input === '' ? 0 : Number(input));
+export const numberValue = (input: unknown): number => (input === '' ? zeroValue : Number(input));
 
 export const nullValue = (input: unknown): null | unknown => (input === '' ? null : input);

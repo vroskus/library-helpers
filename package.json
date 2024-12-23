@@ -19,22 +19,22 @@
     "test:e2e": "echo 'No tests'"
   },
   "dependencies": {
-    "@types/express": "^4.17.21",
+    "@types/express": "^5.0.0",
     "aigle": "^1.14.1",
     "aphrodite": "^2.4.0",
-    "express": "^4.19.2",
+    "express": "^4.21.2",
     "lodash": "^4.17.21",
     "moment": "2.29.4",
-    "query-string": "^9.1.0",
+    "query-string": "^9.1.1",
     "react-animations": "^1.0.0",
     "short-hash": "^1.0.0"
   },
   "devDependencies": {
-    "@types/jest": "^29.5.12",
-    "@types/lodash": "^4.17.7",
-    "@types/node": "^22.4.1",
+    "@types/jest": "^29.5.14",
+    "@types/lodash": "^4.17.13",
+    "@types/node": "^22.10.2",
     "@types/query-string": "^6.3.0",
-    "@vroskus/eslint-config": "^1.0.11",
-    "typescript": "^5.4.5"
+    "@vroskus/eslint-config": "^1.0.19",
+    "typescript": "^5.7.2"
   }
 }

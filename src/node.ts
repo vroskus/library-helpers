@@ -5,4 +5,4 @@ export * from './common';
 
 export const generateHash = (
   value: string,
-): string => crypto.createHash('md5').update(value).digest('hex');
+): string => crypto.createHash('sha512').update(value).digest('hex');

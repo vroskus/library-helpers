@@ -13,8 +13,10 @@ import {
 
 export * from './common';
 
+const zeroValue: number = 0;
+
 const isEmptyString = (value: unknown): boolean => {
-  if (typeof value === 'string' && value.trim().length === 0) {
+  if (typeof value === 'string' && value.trim().length === zeroValue) {
     return true;
   }
 
@@ -94,13 +96,14 @@ export const getUrlGetParams = (input: string): Record<string, null | string> =>
 };
 
 const getScrollTopValue = (elementId?: string, offset?: number): number => {
-  let value = 0;
+  const defaultOffset = 15;
+  let value = zeroValue;
 
   if (document && elementId) {
     const element = document.getElementById(elementId);
 
     if (element) {
-      value = element.offsetTop - (offset || 15);
+      value = element.offsetTop - (offset || defaultOffset);
     }
   }
 
@@ -121,13 +124,14 @@ export const scrollTop = (elementId?: string, offset?: number): void => {
 
 export const scrollItem = (itemId: string, elementId: string, offset?: number): void => {
   if (document) {
+    const defaultOffset = -50;
     const item = document.getElementById(itemId);
     const element = document.getElementById(elementId);
 
     if (item && element) {
       item.scroll({
         behavior: 'smooth',
-        top: element.offsetTop + (offset || -50),
+        top: element.offsetTop + (offset || defaultOffset),
       });
     }
   }
