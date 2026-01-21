@@ -1,4 +1,5 @@
 // Helpers
+import * as React from 'react';
 import _ from 'lodash';
 import qs from 'query-string';
 import {
@@ -135,4 +136,14 @@ export const scrollItem = (itemId: string, elementId: string, offset?: number): 
       });
     }
   }
+};
+
+export const usePrevious = <T>(value: T): T | undefined => {
+  const ref = React.useRef<T>(undefined);
+
+  React.useEffect(() => {
+    ref.current = value;
+  });
+
+  return ref.current;
 };
