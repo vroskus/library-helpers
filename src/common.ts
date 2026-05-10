@@ -1,8 +1,3 @@
-// Global Types
-import type {
-  RequestHandler,
-} from 'express';
-
 // Helpers
 import _ from 'lodash';
 import moment from 'moment';
@@ -25,22 +20,6 @@ export const getValue = <V extends null | string | void>(value: V, defaultValue:
   }
 
   return output;
-};
-
-export const durationMiddleware = (): RequestHandler => (
-  req,
-  res,
-  next,
-) => {
-  const start: [number, number] = process.hrtime();
-
-  _.set(
-    req,
-    'start',
-    start,
-  );
-
-  next();
 };
 
 export const getDuration = (start: [number, number] | void): number => {
